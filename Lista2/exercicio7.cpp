@@ -1,3 +1,4 @@
+//Algoritmo baseado no https://www.geeksforgeeks.org/travelling-salesman-problem-implementation-using-backtracking/
 #include <iostream>
 #include <bits/stdc++.h>
 #include <vector>
@@ -6,9 +7,37 @@
 using namespace std;
 #define NumeroDeCidades 4
 
-//Algoritmo baseado no https://www.geeksforgeeks.org/travelling-salesman-problem-implementation-using-backtracking/
 
-void cicloHamiltoniano(int MatrizDeDistancias[NumeroDeCidades][NumeroDeCidades], vector<bool>& FoiVisitado, vector<string>& Ciclo, vector<string>& NomeCidades,int posicaoAtual, int numCidadesVisitas, int custoMinimo, int& total)
+//Teste 1
+  	/*
+    int MatrizDeDistancias[NumeroDeCidades][NumeroDeCidades] = {
+        { 0, 10, 15, 20 },
+        { 10, 0, 35, 25 },
+        { 15, 35, 0, 30 },
+        { 20, 25, 30, 0 }
+    };*/
+    
+   //Teste 2
+  	/*
+    int MatrizDeDistancias[NumeroDeCidades][NumeroDeCidades] = {
+        { 0, 10, 5, 20 },
+        { 10, 0, 25, 25 },
+        { 5, 25, 0, 30 },
+        { 20, 25, 30, 0 }
+    };*/
+    
+    //Teste 3
+  	
+    int MatrizDeDistancias[NumeroDeCidades][NumeroDeCidades] = {
+        { 0, 12, 10, 20 },
+        { 12, 0, 23, 25 },
+        { 10, 23, 0, 30 },
+        { 20, 25, 30, 0 }
+    };
+	vector<bool> FoiVisitado(NumeroDeCidades);
+
+
+void cicloHamiltoniano( int posicaoAtual, int numCidadesVisitas, int custoMinimo, int& total)
 {
   
     if (numCidadesVisitas == NumeroDeCidades && MatrizDeDistancias[posicaoAtual][0]) {
@@ -20,50 +49,15 @@ void cicloHamiltoniano(int MatrizDeDistancias[NumeroDeCidades][NumeroDeCidades],
         if (!FoiVisitado[i] && MatrizDeDistancias[posicaoAtual][i]) {
            
             FoiVisitado[i] = true;
-            cicloHamiltoniano(MatrizDeDistancias, FoiVisitado,Ciclo, NomeCidades, i,  numCidadesVisitas + 1, custoMinimo + MatrizDeDistancias[posicaoAtual][i], total);
+            cicloHamiltoniano(  i,  numCidadesVisitas + 1, custoMinimo + MatrizDeDistancias[posicaoAtual][i], total);
             FoiVisitado[i] = false;
         }
     }
 };
 
 int main(int argc, char** argv) {
-
-  	//Teste 1
-  	/*
-    int MatrizDeDistancias[NumeroDeCidades][NumeroDeCidades] = {
-        { 0, 10, 15, 20 },
-        { 10, 0, 35, 25 },
-        { 15, 35, 0, 30 },
-        { 20, 25, 30, 0 }
-    };*/
-    
-   //Teste 2
-  	
-    int MatrizDeDistancias[NumeroDeCidades][NumeroDeCidades] = {
-        { 0, 10, 5, 20 },
-        { 10, 0, 25, 25 },
-        { 5, 25, 0, 30 },
-        { 20, 25, 30, 0 }
-    };
-    
-    //Teste 3
-  	/*
-    int MatrizDeDistancias[NumeroDeCidades][NumeroDeCidades] = {
-        { 0, 10, 15, 20 },
-        { 10, 0, 35, 25 },
-        { 15, 35, 0, 30 },
-        { 20, 25, 30, 0 }
-    };*/
-  
-   vector<string> NomeCidades;
-   NomeCidades.push_back("A");
-   NomeCidades.push_back("B");
-   NomeCidades.push_back("C");
-   NomeCidades.push_back("D");
+	
    
-    vector<bool> FoiVisitado(NumeroDeCidades);
-     vector<string> Ciclo(NumeroDeCidades);
-     
      
     for (int i = 0; i < NumeroDeCidades; i++)
         FoiVisitado[i] = false;
@@ -73,7 +67,7 @@ int main(int argc, char** argv) {
     
     int total = INT_MAX;
   
-    cicloHamiltoniano (MatrizDeDistancias, FoiVisitado, Ciclo, NomeCidades, 0, 1, 0, total);
+    cicloHamiltoniano ( 0, 1, 0, total);
         
     printf( " A distancia minima a ser percorrida e %d", total);
   
