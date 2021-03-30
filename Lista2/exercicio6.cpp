@@ -13,9 +13,6 @@ struct Ponto{
 vector<Ponto> pontosCasca;
 vector<Ponto> pontos;	
 
-
-	
-//verifica o lado da reta que está o ponto
 int verificaPonto(Ponto PontoA, Ponto PontoB, Ponto PontoC){
 int a, b, c;
 
@@ -38,7 +35,6 @@ if(total>c)
 	
 }
 
-//verifica ponto mais a esquerda
 int verificaPontoMaisAEsquerda(){
 		int posicao = 0;
     	for (int i = 1; i < pontos.size(); i++){
