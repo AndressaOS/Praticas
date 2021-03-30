@@ -28,13 +28,32 @@ void cicloHamiltoniano(int MatrizDeDistancias[NumeroDeCidades][NumeroDeCidades],
 
 int main(int argc, char** argv) {
 
-  	
+  	//Teste 1
+  	/*
     int MatrizDeDistancias[NumeroDeCidades][NumeroDeCidades] = {
         { 0, 10, 15, 20 },
         { 10, 0, 35, 25 },
         { 15, 35, 0, 30 },
         { 20, 25, 30, 0 }
+    };*/
+    
+   //Teste 2
+  	
+    int MatrizDeDistancias[NumeroDeCidades][NumeroDeCidades] = {
+        { 0, 10, 5, 20 },
+        { 10, 0, 25, 25 },
+        { 5, 25, 0, 30 },
+        { 20, 25, 30, 0 }
     };
+    
+    //Teste 3
+  	/*
+    int MatrizDeDistancias[NumeroDeCidades][NumeroDeCidades] = {
+        { 0, 10, 15, 20 },
+        { 10, 0, 35, 25 },
+        { 15, 35, 0, 30 },
+        { 20, 25, 30, 0 }
+    };*/
   
    vector<string> NomeCidades;
    NomeCidades.push_back("A");
@@ -55,9 +74,8 @@ int main(int argc, char** argv) {
     int total = INT_MAX;
   
     cicloHamiltoniano (MatrizDeDistancias, FoiVisitado, Ciclo, NomeCidades, 0, 1, 0, total);
-    
-    
-    cout << total;
+        
+    printf( " A distancia minima a ser percorrida e %d", total);
   
     return 0;
 	
