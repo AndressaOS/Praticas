@@ -6,23 +6,21 @@
 using namespace std;
 #define NumeroDeCidades 4
 
+//Algoritmo baseado no https://www.geeksforgeeks.org/travelling-salesman-problem-implementation-using-backtracking/
 
-void cicloHamiltoniano(int MatrizDeDistancias[NumeroDeCidades][NumeroDeCidades], vector<bool>& FoiVisitado, vector<string>& Ciclo, vector<string>& NomeCidades,int posicaoAtual, int numCidadesVisitas, int custoMinimo, int& ans)
+void cicloHamiltoniano(int MatrizDeDistancias[NumeroDeCidades][NumeroDeCidades], vector<bool>& FoiVisitado, vector<string>& Ciclo, vector<string>& NomeCidades,int posicaoAtual, int numCidadesVisitas, int custoMinimo, int& total)
 {
   
     if (numCidadesVisitas == NumeroDeCidades && MatrizDeDistancias[posicaoAtual][0]) {
-        ans = min(ans, custoMinimo + MatrizDeDistancias[posicaoAtual][0]);
-        Ciclo.push_back(NomeCidades[posicaoAtual]);
+        total = min(total, custoMinimo + MatrizDeDistancias[posicaoAtual][0]);
         return;
     }
-  
-  
+    
     for (int i = 0; i < NumeroDeCidades; i++) {
         if (!FoiVisitado[i] && MatrizDeDistancias[posicaoAtual][i]) {
            
             FoiVisitado[i] = true;
-            
-            cicloHamiltoniano(MatrizDeDistancias, FoiVisitado,Ciclo, NomeCidades, i,  numCidadesVisitas + 1, custoMinimo + MatrizDeDistancias[posicaoAtual][i], ans);
+            cicloHamiltoniano(MatrizDeDistancias, FoiVisitado,Ciclo, NomeCidades, i,  numCidadesVisitas + 1, custoMinimo + MatrizDeDistancias[posicaoAtual][i], total);
             FoiVisitado[i] = false;
         }
     }
@@ -53,17 +51,13 @@ int main(int argc, char** argv) {
   
   
     FoiVisitado[0] = true;
-    Ciclo.push_back(NomeCidades[0]);
-    int ans = INT_MAX;
-  
-    cicloHamiltoniano (MatrizDeDistancias, FoiVisitado, Ciclo, NomeCidades, 0, 1, 0, ans);
     
-     for (int i = 0; i < Ciclo.size(); i++){
-     	cout << Ciclo[i];
-	 }
-        
+    int total = INT_MAX;
   
-    cout << ans;
+    cicloHamiltoniano (MatrizDeDistancias, FoiVisitado, Ciclo, NomeCidades, 0, 1, 0, total);
+    
+    
+    cout << total;
   
     return 0;
 	
