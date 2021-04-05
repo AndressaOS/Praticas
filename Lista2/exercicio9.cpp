@@ -29,10 +29,11 @@ int buscaEmLargura( string vertice){
 	
 		int elemento= fila[0];
 		JaVisitado[elemento]=1;
+		cout<< "Caminho:" << Vertices[elemento];
 			if(Vertices[elemento].compare(vertice)!=0){	
 			for(int i=0; i<NumVertices; i++){
     			if(MatrizDeAdjacencias[elemento][i]!=0){
-    				cout<< Vertices[i];
+    				cout<< " " << Vertices[i] << "-";
     				int comparacao = Vertices[i].compare(vertice);
     				if((comparacao!=0) && !JaVisitado[i])
     					fila.push_back(i);
@@ -68,9 +69,9 @@ int main(){
 	
 	int i = buscaEmLargura("A");
 	if (i!=-1){
-		cout << "O elemento foi encontrado na posicao " << i;
+		cout << "\nO elemento foi encontrado na posicao " << i;
 	}else{
-		cout << "O elemento nao foi encontrado." ;
+		cout << "\nO elemento nao foi encontrado." ;
 	}
 	return 0;
 }

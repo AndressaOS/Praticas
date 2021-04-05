@@ -19,7 +19,31 @@ int MatrizDeAdjacencias[NumVertices][NumVertices] = {
 vector <string> Vertices;
 vector <int> JaVisitado;
 
-int buscaEmProfundidade(string vertice){
+int buscaInterna ( int pai, string vertice){
+	
+		for(int i=0; i<NumVertices; i++){
+    			if(MatrizDeAdjacencias[elemento][i]!=0){
+    				cout<< " " << Vertices[i] << "-";
+    				int comparacao = Vertices[i].compare(vertice);
+    				if((comparacao!=0) && !JaVisitado[i]){
+    					pilha.push_back(i);
+    					buscaInterna(i);
+					}
+    				
+    				else
+    					if (comparacao==0)
+    					return i;
+    			
+				}
+    	
+			}
+	
+	
+	
+
+}
+
+int buscaEmProfundidade( string vertice, int parada){
 
 	vector <int> pilha;
 	pilha.push_back(0);
@@ -27,16 +51,19 @@ int buscaEmProfundidade(string vertice){
 	
 	while( pilha.size() > 0){
 	
-		int elemento= pilha.size()-1;
+		int elemento= pilha[0];
 		JaVisitado[elemento]=1;
-	
-		
+		cout<< "Caminho:" << Vertices[elemento];
+			if(Vertices[elemento].compare(vertice)!=0){	
 			for(int i=0; i<NumVertices; i++){
     			if(MatrizDeAdjacencias[elemento][i]!=0){
-    				cout<< Vertices[i];
+    				cout<< " " << Vertices[i] << "-";
     				int comparacao = Vertices[i].compare(vertice);
-    				if((comparacao!=0) && !JaVisitado[i])
+    				if((comparacao!=0) && !JaVisitado[i]){
     					pilha.push_back(i);
+    					buscaInterna(i);
+					}
+    				
     				else
     					if (comparacao==0)
     					return i;
@@ -45,8 +72,8 @@ int buscaEmProfundidade(string vertice){
     	
 			}
 			pilha.erase(pilha.end());
-		 
-		
+		}else
+			return elemento;
 			
 	}
 		
@@ -67,11 +94,11 @@ int main(){
 	for(int i=0; i<NumVertices; i++)
 		JaVisitado.push_back(0);
 	
-	int i = buscaEmProfundidade("E");
+	int i = buscaEmProfundidade("F");
 	if (i!=-1){
-		cout << "O elemento foi encontrado na posicao " << i;
+		cout << "\nO elemento foi encontrado na posicao " << i;
 	}else{
-		cout << "O elemento nao foi encontrado." ;
+		cout << "\nO elemento nao foi encontrado." ;
 	}
 	return 0;
 }
