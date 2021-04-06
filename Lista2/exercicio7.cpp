@@ -35,7 +35,7 @@ using namespace std;
         { 20, 25, 30, 0 }
     };
 	vector<int> FoiVisitado(NumeroDeCidades);
-	vector<int> PossibilidadeAtual(NumeroDeCidades);
+
 	
 
 
