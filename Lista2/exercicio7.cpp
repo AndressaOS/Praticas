@@ -81,12 +81,12 @@ void caixeiroViajante()
         }
     }
     soma += min;
-    
+    cout << ("Rota: \n")<<1 ;
      for (j = 0; j < NumeroDeCidades; j++){ 
          cout << "\n"<< rota[j];
     }
  
-    cout << ("O menor custo é : ");
+    cout << ("\nO menor custo e : ");
     cout << (soma);
 
    	
