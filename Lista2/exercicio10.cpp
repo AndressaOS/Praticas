@@ -1,7 +1,9 @@
+//Baseado no algoritmo disponivel em : https://gist.github.com/marcoscastro/7951eb79467c892f3e63
 #include <iostream>
 #include <bits/stdc++.h>
 #include <vector>
 #include <string>
+#include <stack> 
 
 using namespace std;
 
@@ -18,69 +20,64 @@ int MatrizDeAdjacencias[NumVertices][NumVertices] = {
     };
 vector <string> Vertices;
 vector <int> JaVisitado;
+vector <int> pilha;
 
-int buscaInterna ( int pai, string vertice){
-	
-		for(int i=0; i<NumVertices; i++){
-    			if(MatrizDeAdjacencias[elemento][i]!=0){
-    				cout<< " " << Vertices[i] << "-";
-    				int comparacao = Vertices[i].compare(vertice);
-    				if((comparacao!=0) && !JaVisitado[i]){
-    					pilha.push_back(i);
-    					buscaInterna(i);
-					}
-    				
-    				else
-    					if (comparacao==0)
-    					return i;
-    			
-				}
-    	
-			}
-	
-	
-	
 
-}
 
-int buscaEmProfundidade( string vertice, int parada){
-
-	vector <int> pilha;
-	pilha.push_back(0);
-	
-	
-	while( pilha.size() > 0){
-	
-		int elemento= pilha[0];
-		JaVisitado[elemento]=1;
-		cout<< "Caminho:" << Vertices[elemento];
-			if(Vertices[elemento].compare(vertice)!=0){	
-			for(int i=0; i<NumVertices; i++){
-    			if(MatrizDeAdjacencias[elemento][i]!=0){
-    				cout<< " " << Vertices[i] << "-";
-    				int comparacao = Vertices[i].compare(vertice);
-    				if((comparacao!=0) && !JaVisitado[i]){
-    					pilha.push_back(i);
-    					buscaInterna(i);
-					}
-    				
-    				else
-    					if (comparacao==0)
-    					return i;
-    			
-				}
-    	
-			}
-			pilha.erase(pilha.end());
-		}else
-			return elemento;
-			
-	}
-		
-	return -1;
-   
+int buscaEmProfundidade(int v, string vertice){
+	stack<int> pilha;
+	while(true)	{
+		if(!JaVisitado[v]){
+			cout << "Vertice "<< Vertices[v]<<"\n";
+			JaVisitado[v] = 1; 
+			pilha.push(v); // insere "v" na pilha
+		}
  
+		bool achou = false;
+	int i;
+		
+			for(i=0; i<NumVertices; i++){
+	
+    			if(MatrizDeAdjacencias[v][i]!=0){
+    				
+    				int comparacao = Vertices[i].compare(vertice);
+    			
+    				if((comparacao!=0) && !JaVisitado[i]){
+    						
+    				   	achou = true;
+						break;
+    				
+					}
+    				
+    				else{
+						
+    						if (comparacao==0){  
+									cout << "Vertice "<< Vertices[i]<<"\n"	;				
+    						
+    								return i;
+						}
+    					}
+    			
+				}
+    	
+			}
+ 
+		if(achou)
+			v = i; 
+		else{
+		
+			pilha.pop();
+		
+			if(pilha.empty())
+				break;
+			
+			v = pilha.top();
+		}
+	}
+	return -1;
 }
+
+
 
 int main(){
 	
@@ -94,7 +91,8 @@ int main(){
 	for(int i=0; i<NumVertices; i++)
 		JaVisitado.push_back(0);
 	
-	int i = buscaEmProfundidade("F");
+	int i = buscaEmProfundidade(0, "F");
+
 	if (i!=-1){
 		cout << "\nO elemento foi encontrado na posicao " << i;
 	}else{
