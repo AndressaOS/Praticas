@@ -48,9 +48,7 @@ void caixeiroViajante()
     int rota[NumeroDeCidades];
 
    
-    while (i < NumeroDeCidades && j < NumeroDeCidades){
- 
-       
+    while (i < NumeroDeCidades && j < NumeroDeCidades){       
         if (cont >= NumeroDeCidades - 1){
             break;
         }
@@ -76,8 +74,7 @@ void caixeiroViajante()
    
     i = rota[cont - 1] - 1;
  
-    for (j = 0; j < NumeroDeCidades; j++){
- 
+    for (j = 0; j < NumeroDeCidades; j++){ 
         if ((i != j) && MatrizDeDistancias[i][j] < min){
             min = MatrizDeDistancias[i][j];
             rota[cont] = j + 1;
@@ -85,8 +82,7 @@ void caixeiroViajante()
     }
     soma += min;
     
-     for (j = 0; j < NumeroDeCidades; j++){
- 
+     for (j = 0; j < NumeroDeCidades; j++){ 
          cout << "\n"<< rota[j];
     }
  
@@ -100,8 +96,7 @@ int main(int argc, char** argv) {
     for (int i = 0; i < NumeroDeCidades; i++)
         FoiVisitado[i] = 0;
   
-  
-   caixeiroViajante();
+    caixeiroViajante();
    
   
     return 0;
