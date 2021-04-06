@@ -34,9 +34,7 @@ using namespace std;
         { 10, 23, 0, 30 },
         { 20, 25, 30, 0 }
     };
-	vector<int> FoiVisitado(NumeroDeCidades);
-
-	
+	vector<int> FoiVisitado(NumeroDeCidades);	
 
 
 void caixeiroViajante()
@@ -50,29 +48,22 @@ void caixeiroViajante()
     int rota[NumeroDeCidades];
 
    
-    while (i < NumeroDeCidades && j < NumeroDeCidades)
-    {
+    while (i < NumeroDeCidades && j < NumeroDeCidades){
  
        
-        if (cont >= NumeroDeCidades - 1)
-        {
+        if (cont >= NumeroDeCidades - 1){
             break;
         }
- 
-        
-        if (j != i && (FoiVisitado[j] == 0))
-        {
-            if (MatrizDeDistancias[i][j] < min)
-            {
+         
+        if (j != i && (FoiVisitado[j] == 0)){
+            if (MatrizDeDistancias[i][j] < min){
                 min = MatrizDeDistancias[i][j];
                 rota[cont] = j + 1;
             }
         }
         j++;
- 
-      
-        if (j == NumeroDeCidades)
-        {
+       
+        if (j == NumeroDeCidades){
             soma += min;
             min = INT_MAX;
             FoiVisitado[rota[cont] - 1] = 1;
@@ -85,19 +76,16 @@ void caixeiroViajante()
    
     i = rota[cont - 1] - 1;
  
-    for (j = 0; j < NumeroDeCidades; j++)
-    {
+    for (j = 0; j < NumeroDeCidades; j++){
  
-        if ((i != j) && MatrizDeDistancias[i][j] < min)
-        {
+        if ((i != j) && MatrizDeDistancias[i][j] < min){
             min = MatrizDeDistancias[i][j];
             rota[cont] = j + 1;
         }
     }
     soma += min;
     
-     for (j = 0; j < NumeroDeCidades; j++)
-    {
+     for (j = 0; j < NumeroDeCidades; j++){
  
          cout << "\n"<< rota[j];
     }
