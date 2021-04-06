@@ -8,7 +8,7 @@
 using namespace std;
 
 #define NumVertices 6 
-
+/*
 int MatrizDeAdjacencias[NumVertices][NumVertices] = {
         { 0, 1, 1, 0 , 0, 0 },
         { 1, 0, 0, 1 , 1, 0 },
@@ -17,7 +17,29 @@ int MatrizDeAdjacencias[NumVertices][NumVertices] = {
         { 0, 1, 0, 0 , 0, 0 },
         { 0, 0, 1, 0 , 0, 0 },
         
+    };*/
+    /*
+int MatrizDeAdjacencias[NumVertices][NumVertices] = {
+        { 0, 0, 1, 0 , 1, 0 },
+        { 1, 0, 1, 1 , 1, 0 },
+        { 1, 0, 0, 0 , 0, 1 },
+        { 0, 1, 0, 1 , 0, 0 },
+        { 0, 1, 0, 0 , 0, 1 },
+        { 0, 0, 1, 0 , 0, 0 },
+        
+    };*/
+    
+int MatrizDeAdjacencias[NumVertices][NumVertices] = {
+        { 0, 1, 1, 0 , 0, 0 },
+        { 1, 0, 0, 1 , 1, 0 },
+        { 1, 0, 0, 0 , 0, 1 },
+        { 0, 1, 0, 0 , 0, 1 },
+        { 0, 1, 0, 1 , 0, 0 },
+        { 0, 0, 1, 0 , 1, 0 },
+        
     };
+    
+
 vector <string> Vertices;
 vector <int> JaVisitado;
 vector <int> pilha;
