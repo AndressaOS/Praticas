@@ -1,4 +1,4 @@
-//Algoritmo baseado no https://www.geeksforgeeks.org/travelling-salesman-problem-implementation-using-backtracking/
+//Algoritmo baseado no https://www.geeksforgeeks.org/travelling-salesman-problem-greedy-approach/
 #include <iostream>
 #include <bits/stdc++.h>
 #include <vector>
@@ -34,42 +34,87 @@ using namespace std;
         { 10, 23, 0, 30 },
         { 20, 25, 30, 0 }
     };
-	vector<bool> FoiVisitado(NumeroDeCidades);
+	vector<int> FoiVisitado(NumeroDeCidades);
+	vector<int> PossibilidadeAtual(NumeroDeCidades);
+	
 
 
-void cicloHamiltoniano( int posicaoAtual, int numCidadesVisitas, int custoMinimo, int& total)
+void caixeiroViajante()
 {
-  
-    if (numCidadesVisitas == NumeroDeCidades && MatrizDeDistancias[posicaoAtual][0]) {
-        total = min(total, custoMinimo + MatrizDeDistancias[posicaoAtual][0]);
-        return;
-    }
-    
-    for (int i = 0; i < NumeroDeCidades; i++) {
-        if (!FoiVisitado[i] && MatrizDeDistancias[posicaoAtual][i]) {
-           
-            FoiVisitado[i] = true;
-            cicloHamiltoniano(  i,  numCidadesVisitas + 1, custoMinimo + MatrizDeDistancias[posicaoAtual][i], total);
-            FoiVisitado[i] = false;
+	
+    int soma = 0;
+    int cont = 0;
+    int j = 0, i = 0;
+    int min = INT_MAX;
+    FoiVisitado[0] = 1;
+    int rota[NumeroDeCidades];
+
+   
+    while (i < NumeroDeCidades && j < NumeroDeCidades)
+    {
+ 
+       
+        if (cont >= NumeroDeCidades - 1)
+        {
+            break;
+        }
+ 
+        
+        if (j != i && (FoiVisitado[j] == 0))
+        {
+            if (MatrizDeDistancias[i][j] < min)
+            {
+                min = MatrizDeDistancias[i][j];
+                rota[cont] = j + 1;
+            }
+        }
+        j++;
+ 
+      
+        if (j == NumeroDeCidades)
+        {
+            soma += min;
+            min = INT_MAX;
+            FoiVisitado[rota[cont] - 1] = 1;
+            j = 0;
+            i = rota[cont] - 1;
+            cont++;
         }
     }
-};
-
-int main(int argc, char** argv) {
-	
+ 
    
+    i = rota[cont - 1] - 1;
+ 
+    for (j = 0; j < NumeroDeCidades; j++)
+    {
+ 
+        if ((i != j) && MatrizDeDistancias[i][j] < min)
+        {
+            min = MatrizDeDistancias[i][j];
+            rota[cont] = j + 1;
+        }
+    }
+    soma += min;
+    
+     for (j = 0; j < NumeroDeCidades; j++)
+    {
+ 
+         cout << "\n"<< rota[j];
+    }
+ 
+    cout << ("O menor custo é : ");
+    cout << (soma);
+
+   	
+}
+int main(int argc, char** argv) {
      
     for (int i = 0; i < NumeroDeCidades; i++)
-        FoiVisitado[i] = false;
+        FoiVisitado[i] = 0;
   
   
-    FoiVisitado[0] = true;
-    
-    int total = INT_MAX;
-  
-    cicloHamiltoniano ( 0, 1, 0, total);
-        
-    printf( " A distancia minima a ser percorrida e %d", total);
+   caixeiroViajante();
+   
   
     return 0;
 	
