@@ -159,6 +159,9 @@ int main(int argc, char** argv) {
 	
 	Arvore arvore;
 	No *no = NULL;
+	
+	/*
+	//Teste 1
 	arvore.inserir(10);
 	arvore.inserir(5);
 	arvore.inserir(8);
@@ -167,11 +170,39 @@ int main(int argc, char** argv) {
 	arvore.inserir(13);
 	arvore.inserir(20);
 	arvore.mostraArvore(arvore.getRaiz(), 0);
-	no = arvore.buscar(22);
+	no = arvore.buscar(22);*/
+	
+	/*
+	//Teste 2
+	arvore.inserir(10);
+	arvore.inserir(4);
+	arvore.inserir(8);
+	arvore.inserir(15);
+	arvore.inserir(22);
+	arvore.inserir(17);
+	arvore.inserir(21);
+	arvore.mostraArvore(arvore.getRaiz(), 0);
+	no = arvore.buscar(8);*/
+	
+	//Teste 3
+	arvore.inserir(30);
+	arvore.inserir(40);
+	arvore.inserir(38);
+	arvore.inserir(15);
+	arvore.inserir(22);
+	arvore.inserir(17);
+	arvore.inserir(21);
+	arvore.mostraArvore(arvore.getRaiz(), 0);
+	no = arvore.buscar(15);
+	
+	
 	if(no!=NULL)
 	cout<< "\O no "<< no->getValor()<<" foi encontrado.";
 	else
 	cout<< "\nO no nao foi encontrado.";
+	
+	
+	
 	
 	return 0;
 }
