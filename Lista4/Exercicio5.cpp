@@ -58,6 +58,34 @@ void maior_menor_rapido(vector<int>& A){
 	}
 }
 
+void maior_menor_dc(vector<int>& A, int menor, int maior, int l, int r){
+	if(r==l){
+		menor = A[l];
+		maior = A[l];
+	}else{
+		if(r-l==1){
+			if(A[l]<=A[r]){
+				menor = A[l];
+				maior = A[r];
+			}else{
+				menor = A[r];
+				maior = A[l];
+			}
+		}else{
+			int menor2, maior2;
+			maior_menor_dc(A, menor, maior, l, (l+r)/2);
+			maior_menor_dc(A, menor2, maior2, ((l+r)/2)+1, r);
+			if(menor2<menor)
+				menor = menor2;
+			if(maior2> maior)
+				maior = maior2;
+		}
+		
+	}
+	
+
+}
+
 void maior_menor_fb(vector<int>& A){
 	int maior, menor;
 	
@@ -124,6 +152,7 @@ int main(int argc, char** argv) {
 	
 	maior_menor_rapido(a);
 	maior_menor_fb(a);
+	maior_menor_dc(a,);
 	
 	return 0;
 }
