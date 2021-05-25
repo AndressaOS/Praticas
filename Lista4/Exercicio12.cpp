@@ -153,6 +153,34 @@ public:
     	printf("%d\n", valor);
 	}
 	
+	void preorder(No* no){
+		if(no!=NULL){
+			
+			cout<<" - "<<no->getValor();
+			preorder(no->getEsq());
+			preorder(no->getDir());
+		}
+	}
+	
+	void posorder(No* no){
+		if(no!=NULL){
+			
+			preorder(no->getEsq());
+			preorder(no->getDir());
+			cout<<" - "<<no->getValor();
+		}
+	}
+	
+	void inorder(No* no){
+		if(no==NULL)
+			return;
+		
+		inorder(no->getEsq());	
+		cout<<" - "<<no->getValor();
+		inorder(no->getDir());
+		
+	}
+	
 };
 
 int main(int argc, char** argv) {
@@ -200,8 +228,14 @@ int main(int argc, char** argv) {
 	cout<< "\O no "<< no->getValor()<<" foi encontrado.";
 	else
 	cout<< "\nO no nao foi encontrado.";
+	cout<< "\nPreorder: ";
+	arvore.preorder(arvore.getRaiz());
 	
+	cout<< "\nPosorder: ";
+	arvore.posorder(arvore.getRaiz());
 	
+	cout<< "\nInorder: ";
+	arvore.inorder(arvore.getRaiz());
 	
 	
 	return 0;

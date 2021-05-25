@@ -153,6 +153,16 @@ public:
     	printf("%d\n", valor);
 	}
 	
+	
+	int niveis(No* no){
+			if(no==NULL){
+				return 0;
+			}else{
+				return max(niveis(no->getEsq()), niveis(no->getDir()))+1;
+			}
+			
+		
+	}
 };
 
 int main(int argc, char** argv) {
@@ -202,7 +212,7 @@ int main(int argc, char** argv) {
 	cout<< "\nO no nao foi encontrado.";
 	
 	
-	
+	cout<< "\nA arvore possui : "<<	arvore.niveis(arvore.getRaiz())<<" niveis.";
 	
 	return 0;
 }
