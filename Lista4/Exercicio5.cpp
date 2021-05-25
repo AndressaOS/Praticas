@@ -1,5 +1,6 @@
 #include <iostream>
 #include<vector>
+#include <cmath>
 using namespace std;
 
 void maior_menor_rapido(vector<int>& A){
@@ -58,31 +59,45 @@ void maior_menor_rapido(vector<int>& A){
 	}
 }
 
-void maior_menor_dc(vector<int>& A, int menor, int maior, int l, int r){
+void maior_menor_dc(vector<int>& A, vector<int>& minMax, int l, int r){
+ 
 	if(r==l){
-		menor = A[l];
-		maior = A[l];
-	}else{
-		if(r-l==1){
-			if(A[l]<=A[r]){
-				menor = A[l];
-				maior = A[r];
-			}else{
-				menor = A[r];
-				maior = A[l];
-			}
-		}else{
-			int menor2, maior2;
-			maior_menor_dc(A, menor, maior, l, (l+r)/2);
-			maior_menor_dc(A, menor2, maior2, ((l+r)/2)+1, r);
-			if(menor2<menor)
-				menor = menor2;
-			if(maior2> maior)
-				maior = maior2;
-		}
+		minMax[0]= l;
+		minMax[1] = l;
 		
+	}else if((r-l)==1){ 
+			
+			if(A[l]<=A[r]){
+				
+				minMax[0] = l;
+				minMax[1] = r;
+			}else{
+				
+				minMax[0] = r;
+				minMax[1] = l;
+			
+			} 
+			
 	}
-	
+	else if((r-l)>1){
+			vector<int> minMax2;
+			minMax.push_back(0);
+			minMax2.push_back(0);
+			
+			maior_menor_dc(A, minMax, l, floor((l+r)/2));
+			
+			maior_menor_dc(A, minMax2, floor((l+r)/2)+1, r);
+		
+			if(A[minMax2[0]]<A[minMax[0]]){
+				minMax[0] = minMax2[0];
+			}
+			if(A[minMax2[1]]>A[minMax[1]]){
+				minMax[1] = minMax2[1];
+			}
+	}
+		
+
+
 
 }
 
@@ -118,6 +133,7 @@ void maior_menor_fb(vector<int>& A){
 int main(int argc, char** argv) {
 	
 		vector<int> a;
+		
 	
 	/*//Teste 1
 	a.push_back(2);
@@ -152,7 +168,15 @@ int main(int argc, char** argv) {
 	
 	maior_menor_rapido(a);
 	maior_menor_fb(a);
-	maior_menor_dc(a,);
+ 	
+	vector<int> minMax;
+	minMax.push_back(0);
+	minMax.push_back(0);
+ 	
+ 	maior_menor_dc(a, minMax, 0, (a.size()-1));
+ 	
+ 	cout<< "\nO maior esta na posicao: " << minMax[1];
+	cout<< "\nO menor esta na posicao: " << minMax[0];
 	
 	return 0;
 }
