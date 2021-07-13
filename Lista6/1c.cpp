@@ -1,26 +1,35 @@
 #include <iostream>
+#include <vector>
 using namespace std;
 
-int Fibonacci(int x){
+void IniciaFibonacci(vector<int> &fibo, int x){
 	
-
-	if((x==0)|| (x==1))
-		return 1;
-	else{
-		int soma = 2;
-		int ant = 1;	
-		for (int i=3; i<x; i++){
-			int aux = soma;
-			soma += ant;
-			ant = aux;			
-			
-		}
-		return soma;
+	fibo.push_back(0);
+	fibo.push_back(1);
+	fibo.push_back(1);
+	
+	for (int i=3; i<=x; i++){
+		fibo.push_back(-1);
 	}
+}
+
+int Fibonacci(vector<int> &fibo, int x){
+		
+	if (fibo[x]==-1){
+		fibo[x]= Fibonacci(fibo, x-1) + Fibonacci(fibo, x-2);
+	}else{
+		return fibo[x];
+	}
+	
 }
 
 int main(int argc, char** argv) {
 	
-	cout<< "O nesimo numero e: "<<	Fibonacci(6);
+	vector<int> fibo;
+	
+	int x = 5; 
+	
+	IniciaFibonacci(fibo, x);
+	cout<< "O nesimo numero e: "<<	Fibonacci(fibo, x);
 	return 0;
 }
