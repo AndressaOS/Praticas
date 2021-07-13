@@ -3,3 +3,6 @@ CursorCol=15
 CursorRow=73
 TopLine=46
 LeftChar=1
+[Editors]
+Order=
+Focused=-1
