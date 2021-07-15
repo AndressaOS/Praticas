@@ -1,26 +1,32 @@
 #include <iostream>
 #include<vector>
+#include <bits/stdc++.h>
 using namespace std;
+  
 
-
-/*
-ALGORITHM LexicographicPermute (n)
-// Gera permutações em ordem lexicográfica
-// Input: Um inteiro positivo n
-// Resultado: uma lista de todas as permutações de {1, ..., n} em ordem lexicográfica
-inicializar a primeira permutação com 12 ... n
-enquanto a última permutação tem dois elementos consecutivos em ordem crescente,
-seja i seu maior índice tal que ai <ai + 1 // ai + 1> ai + 2> ...> um
-encontre o maior índice j tal que ai <aj // j = i + 1 já que ai <ai + 1
-trocar ai com aj // ai + 1ai + 2 ... an permanecerá em ordem decrescente
-inverter a ordem dos elementos de ai + 1 para um inclusivo
-adicione a nova permutação à lista */
-
-void LexicographicPermute(int n){
-	
+void nPermute(string str, long int n)
+{
+    
+    sort(str.begin(), str.end());
+  
+    long int i = 1;
+    do {
+        
+        if (i == n)
+            break;
+  
+        i++;
+    } while (next_permutation(str.begin(), str.end()));
+  
+   
+    cout << str;
 }
+  
 
-int main(int argc, char** argv) {
-	LexicographicPermute(5);
-	return 0;
+int main()
+{
+    string str = "ABC";
+    long int n = 6;
+    nPermute(str, n);
+    return 0;
 }
